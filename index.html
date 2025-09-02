@@ -825,7 +825,9 @@
                 const img = document.createElement('img');
                 img.alt = itemName + 'の画像';
                 img.className = 'item-image';
-                img.loading = 'lazy';
+                // Avoid Safari iOS quirk: off-DOM lazy images may never load
+                // Keep eager load for reliability on mobile Safari
+                img.loading = 'eager';
                 img.decoding = 'async';
                 if (/^https?:\/\//.test(preferredSrc)) {
                     img.referrerPolicy = 'no-referrer';
