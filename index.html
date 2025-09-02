@@ -246,22 +246,76 @@
             padding: 30px;
             border-radius: 16px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            text-align: center;
         }
 
         .guide-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
+            font-size: 1.6rem;
+            margin-bottom: 16px;
+            color: #333;
+            text-align: center;
+        }
+
+        .guide-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+        }
+
+        .guide-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 18px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-left: 4px solid #ffb3c1; /* soft accent */
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .guide-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+        }
+
+        .guide-card .guide-head {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .guide-icon {
+            font-size: 1.4rem;
+        }
+
+        .guide-title {
+            font-size: 1.1rem;
+            font-weight: 700;
             color: #333;
         }
 
-        .guide-content p {
-            font-size: 1.1rem;
+        .guide-desc {
+            font-size: 0.95rem;
             color: #555;
-            line-height: 1.8;
+            margin-bottom: 10px;
         }
 
-        /* Form Section */
+        .guide-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .guide-link {
+            display: inline-block;
+            background: #e3f2fd;
+            color: #0d47a1;
+            text-decoration: none;
+            font-size: 0.85rem;
+            padding: 4px 10px;
+            border-radius: 999px;
+            border: 1px solid #90caf9;
+        }
+
+        /* Form/Contact Section */
         .form-section {
             padding: 80px 0;
             background: #fff;
@@ -293,14 +347,36 @@
             font-weight: 500;
         }
 
-        .form-placeholder {
-            background: #f5f5f5;
-            border: 2px dashed #ccc;
+        .contact-card {
+            background: #ffffff;
             border-radius: 12px;
-            padding: 40px;
-            text-align: center;
-            color: #666;
-            font-style: italic;
+            padding: 24px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .contact-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .contact-card p,
+        .contact-card li {
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        .contact-list {
+            margin: 8px 0 0 18px;
+        }
+
+        .contact-note {
+            margin-top: 10px;
+            background: #fff8e1;
+            border-left: 4px solid #ffb300;
+            padding: 10px 12px;
+            border-radius: 6px;
+            color: #555;
         }
 
         /* FAQ Section */
@@ -373,6 +449,9 @@
             .section-title {
                 font-size: 1.6rem;
             }
+            .guide-cards {
+                grid-template-columns: 1fr;
+            }
         }
 
         /* Focus styles for accessibility */
@@ -421,7 +500,7 @@
             <h2 class="section-title">おすすめアイテム</h2>
             <div class="items-grid">
                 <!-- スリーピングベスト -->
-                <div class="item-card">
+                <div class="item-card" id="item-sleeping-vest">
                     <div class="item-image-placeholder">
                         Familiar<br>スリーピングベスト<br>画像
                     </div>
@@ -451,7 +530,7 @@
                 </div>
 
                 <!-- プーメリー -->
-                <div class="item-card">
+                <div class="item-card" id="item-pooh-merry">
                     <div class="item-image-placeholder">
                         くまのプーさん<br>6WAYジム<br>プーメリー
                     </div>
@@ -481,7 +560,7 @@
                 </div>
 
                 <!-- スリープミー -->
-                <div class="item-card">
+                <div class="item-card" id="item-sleepme">
                     <div class="item-image-placeholder">
                         YOGASLEEP<br>スリープミー<br>ホワイトノイズマシン
                     </div>
@@ -510,7 +589,7 @@
                 </div>
 
                 <!-- 見守りカメラ -->
-                <div class="item-card">
+                <div class="item-card" id="item-camera">
                     <div class="item-image-placeholder">
                         SwitchBot<br>見守りカメラ<br>ベビーモニター
                     </div>
@@ -540,7 +619,7 @@
                 </div>
 
                 <!-- Sense-U -->
-                <div class="item-card">
+                <div class="item-card" id="item-senseu">
                     <div class="item-image-placeholder">
                         Sense-U<br>一般医療機器<br>ベビーセンサー
                     </div>
@@ -579,8 +658,52 @@
     <section class="guide-section">
         <div class="container">
             <div class="guide-content">
-                <h3>選び方のヒント</h3>
-                <p>寝かしつけ重視→スリーピングベスト/スリープミー。長く使える→スリーピングベスト/プーメリー。離れても安心→見守りカメラ/Sense‑U。大人も→スリープミー。</p>
+                <h3>選び方のポイント</h3>
+                <div class="guide-cards">
+                    <div class="guide-card">
+                        <div class="guide-head">
+                            <span class="guide-icon">😴</span>
+                            <span class="guide-title">寝かしつけ重視</span>
+                        </div>
+                        <p class="guide-desc">夜の寝かしつけやお昼寝を楽に。</p>
+                        <div class="guide-links">
+                            <a href="#item-sleeping-vest" class="guide-link">スリーピングベスト</a>
+                            <a href="#item-sleepme" class="guide-link">スリープミー</a>
+                        </div>
+                    </div>
+                    <div class="guide-card">
+                        <div class="guide-head">
+                            <span class="guide-icon">📅</span>
+                            <span class="guide-title">長く使える</span>
+                        </div>
+                        <p class="guide-desc">使える期間を重視したい方に。</p>
+                        <div class="guide-links">
+                            <a href="#item-sleeping-vest" class="guide-link">スリーピングベスト</a>
+                            <a href="#item-pooh-merry" class="guide-link">プーメリー</a>
+                        </div>
+                    </div>
+                    <div class="guide-card">
+                        <div class="guide-head">
+                            <span class="guide-icon">📹</span>
+                            <span class="guide-title">離れても安心</span>
+                        </div>
+                        <p class="guide-desc">別室にいる時間も安心したい。</p>
+                        <div class="guide-links">
+                            <a href="#item-camera" class="guide-link">見守りカメラ</a>
+                            <a href="#item-senseu" class="guide-link">Sense‑U センサー</a>
+                        </div>
+                    </div>
+                    <div class="guide-card">
+                        <div class="guide-head">
+                            <span class="guide-icon">👨‍👩‍👧</span>
+                            <span class="guide-title">家族でも使える</span>
+                        </div>
+                        <p class="guide-desc">大人の睡眠にも役立つ。</p>
+                        <div class="guide-links">
+                            <a href="#item-sleepme" class="guide-link">スリープミー</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -588,15 +711,24 @@
     <!-- Form Section -->
     <section class="form-section" id="form-section">
         <div class="container">
-            <h2 class="section-title">ご希望をお聞かせください</h2>
+            <h2 class="section-title">LINEでご希望をお知らせください</h2>
             
             <div class="selected-item" id="selected-item">
                 <h3>選択されたアイテム</h3>
                 <p id="selected-item-name">まだ選択されていません</p>
             </div>
 
-            <div class="form-placeholder">
-                フォームがここに埋め込まれます（form_urlが設定されていません）
+            <div class="contact-card" aria-labelledby="contact-heading">
+                <h3 id="contact-heading">LINEでご連絡ください</h3>
+                <p>このページを作成した本人あてに、LINEでご希望をお知らせください。</p>
+                <p>下記の内容をお送りいただけるとスムーズです。</p>
+                <ul class="contact-list">
+                    <li>ご希望のアイテム名（ページの「選択されたアイテム」をご参照ください）</li>
+                    <li>色・サイズなどの希望（あれば）</li>
+                    <li>お届け先または受け取り方法</li>
+                    <li>その他ご要望</li>
+                </ul>
+                <p class="contact-note">LINE以外での連絡をご希望の場合も、お気軽にお知らせください。</p>
             </div>
         </div>
     </section>
