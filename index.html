@@ -177,6 +177,20 @@
             border-radius: 8px;
         }
 
+        .note {
+            font-size: 0.9rem;
+            color: #555;
+            background: #fff8e1;
+            border-left: 4px solid #ffb300;
+            padding: 10px 12px;
+            border-radius: 6px;
+            margin: 12px 0 20px;
+        }
+        .note a {
+            color: #1976d2;
+            text-decoration: underline;
+        }
+
         .purchase-links {
             margin-bottom: 20px;
         }
@@ -547,6 +561,9 @@
                     <div class="recommended-age">
                         <strong>対象年齢:</strong> 新生児〜必要な期間
                     </div>
+                    <div class="note">
+                        <strong>補足:</strong> 公式サイトにはSense‑U Proのみの掲載ですが、実際に使用していたのはSense‑U（ASIN: <a href="https://www.amazon.co.jp/dp/B07KY57C5Y" target="_blank" rel="noopener noreferrer">B07KY57C5Y</a>）です。AmazonではPro/通常版の両方が取り扱われているため、どちらでも問題ありません。
+                    </div>
                     <div class="purchase-links">
                         <a href="https://shop.sense-u.com/ja-jp" class="purchase-link" target="_blank" rel="noopener noreferrer">公式サイト</a>
                     </div>
@@ -597,7 +614,7 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 出産祝いの目録. All rights reserved.</p>
+            <p>&copy; <span id="current-year">2025</span> 出産祝いの目録. All rights reserved.</p>
         </div>
     </footer>
 
@@ -634,40 +651,70 @@
 
             // Load images dynamically for better GitHub Pages compatibility
             loadProductImages();
+
+            // Set current year in footer
+            const yearEl = document.getElementById('current-year');
+            if (yearEl) yearEl.textContent = String(new Date().getFullYear());
         });
 
         // Function to load product images
         function loadProductImages() {
-            const imageData = {
-                'スリーピングベスト': 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&h=300&fit=crop&crop=center',
-                'プーメリー': 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop&crop=center',
-                'スリープミー': 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=300&fit=crop&crop=center',
-                '見守りカメラ（SwitchBot等）': 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400&h=300&fit=crop&crop=center',
-                'Sense-U 一般医療機器 ベビーセンサー': 'https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=400&h=300&fit=crop&crop=center'
+            // Prefer official-site images (Open Graph or product hero) when available.
+            // Fallbacks use Unsplash only if a mapping is missing.
+            const officialImageMap = {
+                'スリーピングベスト': 'https://familiar.co.jp/cdn/shop/products/07091617_5b430c133fd0b.jpg?v=1667021861&width=1200',
+                'プーメリー': 'https://www.takaratomy.co.jp/products/babyonline/common/img/ogp03.png',
+                'スリープミー': 'https://marpac.jp/sleepme/mod/share.jpg',
+                '見守りカメラ（SwitchBot等）': 'https://www.switchbot.jp/cdn/shop/products/switchbotjian-shou-rikamera-switchbotzhu-shi-hui-she-670147_1200x1200.jpg?v=1698820985',
+                'Sense-U 一般医療機器 ベビーセンサー': 'https://shop.sense-u.com/cdn/shop/files/Sense-U_Logo_Horizontal.png?v=1753985989'
             };
 
-            const placeholders = document.querySelectorAll('.item-image-placeholder');
-            placeholders.forEach((placeholder, index) => {
-                const itemName = Object.keys(imageData)[index];
-                if (itemName && imageData[itemName]) {
-                    const img = document.createElement('img');
-                    img.src = imageData[itemName];
-                    img.alt = itemName + 'の画像';
-                    img.className = 'item-image';
-                    img.loading = 'lazy';
-                    
+            const fallbackImageMap = {
+                'スリーピングベスト': 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&h=600&fit=crop&crop=center',
+                'プーメリー': 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop&crop=center',
+                'スリープミー': 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=800&h=600&fit=crop&crop=center',
+                '見守りカメラ（SwitchBot等）': 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=800&h=600&fit=crop&crop=center',
+                'Sense-U 一般医療機器 ベビーセンサー': 'https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=800&h=600&fit=crop&crop=center'
+            };
+
+            const cards = Array.from(document.querySelectorAll('.item-card'));
+            cards.forEach((card) => {
+                const placeholder = card.querySelector('.item-image-placeholder');
+                const titleEl = card.querySelector('.item-name');
+                if (!placeholder || !titleEl) return;
+
+                const itemName = titleEl.textContent.trim();
+                const linkEl = card.querySelector('.purchase-links a.purchase-link');
+                const preferredSrc = (linkEl && linkEl.getAttribute('data-image')) || officialImageMap[itemName] || fallbackImageMap[itemName];
+                if (!preferredSrc) return;
+
+                const img = document.createElement('img');
+                img.src = preferredSrc;
+                img.alt = itemName + 'の画像';
+                img.className = 'item-image';
+                img.loading = 'lazy';
+
+                // Wrap image with link to official site, if present
+                if (linkEl && linkEl.href) {
+                    const anchor = document.createElement('a');
+                    anchor.href = linkEl.href;
+                    anchor.target = '_blank';
+                    anchor.rel = 'noopener noreferrer';
+                    anchor.appendChild(img);
+                    img.onload = function() {
+                        placeholder.parentNode.replaceChild(anchor, placeholder);
+                    };
+                } else {
                     img.onload = function() {
                         placeholder.parentNode.replaceChild(img, placeholder);
                     };
-                    
-                    img.onerror = function() {
-                        // Keep placeholder if image fails to load
-                        console.log('Failed to load image for:', itemName);
-                    };
                 }
+
+                img.onerror = function() {
+                    console.log('Failed to load image for:', itemName);
+                };
             });
         }
     </script>
 </body>
 </html>
-
