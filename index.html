@@ -686,6 +686,7 @@
                 const itemName = titleEl.textContent.trim();
                 const linkEl = card.querySelector('.purchase-links a.purchase-link');
                 const preferredSrc = (linkEl && linkEl.getAttribute('data-image')) || officialImageMap[itemName] || fallbackImageMap[itemName];
+                const fallbackSrc = fallbackImageMap[itemName];
                 if (!preferredSrc) return;
 
                 const img = document.createElement('img');
@@ -693,6 +694,8 @@
                 img.alt = itemName + 'の画像';
                 img.className = 'item-image';
                 img.loading = 'lazy';
+                img.decoding = 'async';
+                img.referrerPolicy = 'no-referrer';
 
                 // Wrap image with link to official site, if present
                 if (linkEl && linkEl.href) {
@@ -711,6 +714,11 @@
                 }
 
                 img.onerror = function() {
+                    // Try fallback once if official image fails
+                    if (fallbackSrc && img.src !== fallbackSrc) {
+                        img.src = fallbackSrc;
+                        return;
+                    }
                     console.log('Failed to load image for:', itemName);
                 };
             });

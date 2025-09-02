@@ -30,11 +30,23 @@
 
 ## デプロイ方法
 
-1. このリポジトリをGitHubにアップロード
-2. GitHub Pagesを有効化
-3. `index.html`が自動的に公開される
+1. このリポジトリをGitHubにプッシュ
+2. GitHubの Settings → Pages を開く
+   - Source: `main`（または使用中のブランチ） / Root（`/`）を選択
+   - Enforce HTTPS を有効化（画像の混在コンテンツ回避のため）
+3. 数分待つと `https://<username>.github.io/<repo>/` で公開
+   - ユーザーサイト（`<username>.github.io` 直下）にする場合は、リポジトリ名をそのまま `username.github.io` にし、Root から配信
+
+補足（画像の表示について）
+- 各商品の画像は、公式サイトの画像URLを優先して動的に読み込むよう `index.html` のスクリプトで実装済みです。
+- もし一部の画像が表示されない場合は、該当商品の「公式サイト」リンクに `data-image` 属性で画像URLを指定してください。
+  例: `data-image="https://example.com/path/to/official-image.jpg"`
+- それでも表示されない場合は、参照元制限の可能性があるため、別の公式画像URLまたはAmazonの商品画像URLをご検討ください。
+
+Sense‑Uの注記について
+- 公式サイトには Sense‑U Pro のみ掲載ですが、実際に利用していたのは Sense‑U（ASIN: B07KY57C5Y）である旨をページ内に明記済みです。
+- Amazon では Pro/通常版の両方が取り扱われているため、どちらでも問題ありません。
 
 ## ライセンス
 
 © 2025 出産祝いの目録. All rights reserved.
-
