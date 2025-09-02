@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>出産祝いの目録</title>
+    <meta name="description" content="実際に使ってよかった5品からお選びください。私が手配します。">
+    <meta name="keywords" content="出産祝い,ベビー用品,スリーピングベスト,プーメリー,スリープミー,見守りカメラ,ベビーセンサー">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fafafa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #f8bbd9 0%, #e3f2fd 100%);
+            padding: 60px 0;
+            text-align: center;
+            color: #333;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Items Section */
+        .items-section {
+            padding: 80px 0;
+            background: #fff;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 50px;
+            color: #333;
+        }
+
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .item-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 1px solid #f0f0f0;
+        }
+
+        .item-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+
+        .item-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            background: #f5f5f5;
+        }
+
+        .item-image-placeholder {
+            width: 100%;
+            height: 200px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .item-name {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .item-oneliner {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 16px;
+            font-style: italic;
+        }
+
+        .owner-points {
+            margin-bottom: 20px;
+        }
+
+        .owner-points h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 8px;
+        }
+
+        .owner-points ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .owner-points li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 6px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .owner-points li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4caf50;
+            font-weight: bold;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .tag {
+            background: #ffe0b2;
+            color: #e65100;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .recommended-age {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 20px;
+            padding: 8px 12px;
+            background: #f5f5f5;
+            border-radius: 8px;
+        }
+
+        .purchase-links {
+            margin-bottom: 20px;
+        }
+
+        .purchase-link {
+            display: inline-block;
+            color: #1976d2;
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 8px 16px;
+            border: 1px solid #1976d2;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .purchase-link:hover {
+            background: #1976d2;
+            color: white;
+        }
+
+        .cta-button {
+            width: 100%;
+            background: linear-gradient(135deg, #f8bbd9, #e91e63);
+            color: white;
+            border: none;
+            padding: 16px 24px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(233, 30, 99, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(233, 30, 99, 0.4);
+        }
+
+        .cta-button:focus {
+            outline: 3px solid #f8bbd9;
+            outline-offset: 2px;
+        }
+
+        /* Guide Section */
+        .guide-section {
+            padding: 60px 0;
+            background: #f8f9fa;
+        }
+
+        .guide-content {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        .guide-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .guide-content p {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        /* Form Section */
+        .form-section {
+            padding: 80px 0;
+            background: #fff;
+        }
+
+        .selected-item {
+            background: #e8f5e8;
+            border: 2px solid #4caf50;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+            display: none;
+        }
+
+        .selected-item.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .selected-item h3 {
+            color: #2e7d32;
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+        }
+
+        .selected-item p {
+            color: #4caf50;
+            font-weight: 500;
+        }
+
+        .form-placeholder {
+            background: #f5f5f5;
+            border: 2px dashed #ccc;
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            color: #666;
+            font-style: italic;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 60px 0;
+            background: #fff3e0;
+        }
+
+        .faq-content {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            border-left: 4px solid #ff9800;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .faq-content h3 {
+            color: #e65100;
+            font-size: 1.3rem;
+            margin-bottom: 16px;
+        }
+
+        .faq-content p {
+            color: #555;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        /* Footer */
+        .footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .footer p {
+            opacity: 0.8;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .items-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .item-card {
+                padding: 20px;
+            }
+
+            .container {
+                padding: 0 16px;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+        }
+
+        /* Focus styles for accessibility */
+        button:focus,
+        a:focus {
+            outline: 3px solid #f8bbd9;
+            outline-offset: 2px;
+        }
+
+        /* High contrast mode support */
+        @media (prefers-contrast: high) {
+            .item-card {
+                border: 2px solid #333;
+            }
+            
+            .tag {
+                border: 1px solid #e65100;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            .cta-button {
+                display: none;
+            }
+            
+            .hero {
+                background: #f0f0f0 !important;
+                color: #000 !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>出産祝いの目録</h1>
+            <p>実際に使ってよかった5品からお選びください。私が手配します。</p>
+        </div>
+    </section>
+
+    <!-- Items Section -->
+    <section class="items-section">
+        <div class="container">
+            <h2 class="section-title">おすすめアイテム</h2>
+            <div class="items-grid">
+                <!-- スリーピングベスト -->
+                <div class="item-card">
+                    <div class="item-image-placeholder">
+                        Familiar<br>スリーピングベスト<br>画像
+                    </div>
+                    <h3 class="item-name">スリーピングベスト</h3>
+                    <p class="item-oneliner">利用期間が長く、ヘビロテNo.1。</p>
+                    <div class="owner-points">
+                        <h4>実際に使ってみた感想</h4>
+                        <ul>
+                            <li>季節をまたいで長く使える</li>
+                            <li>夜間とお昼寝で大活躍</li>
+                        </ul>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">長く使える</span>
+                        <span class="tag">寝かしつけ</span>
+                        <span class="tag">実用</span>
+                    </div>
+                    <div class="recommended-age">
+                        <strong>対象年齢:</strong> 新生児〜1歳以降
+                    </div>
+                    <div class="purchase-links">
+                        <a href="https://familiar.co.jp/products/150772" class="purchase-link" target="_blank" rel="noopener noreferrer">公式サイト</a>
+                    </div>
+                    <button class="cta-button" onclick="selectItem('スリーピングベスト')" aria-label="スリーピングベストを選択する">
+                        これにする
+                    </button>
+                </div>
+
+                <!-- プーメリー -->
+                <div class="item-card">
+                    <div class="item-image-placeholder">
+                        くまのプーさん<br>6WAYジム<br>プーメリー
+                    </div>
+                    <h3 class="item-name">プーメリー</h3>
+                    <p class="item-oneliner">新生児期から1歳まで一貫して使えたおもちゃ。</p>
+                    <div class="owner-points">
+                        <h4>実際に使ってみた感想</h4>
+                        <ul>
+                            <li>寝かしつけ・不機嫌時にも有効</li>
+                            <li>つかまり立ち練習にも役立つ</li>
+                        </ul>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">長く使える</span>
+                        <span class="tag">あやしやすい</span>
+                        <span class="tag">定番</span>
+                    </div>
+                    <div class="recommended-age">
+                        <strong>対象年齢:</strong> 新生児〜1歳
+                    </div>
+                    <div class="purchase-links">
+                        <a href="https://www.takaratomy.co.jp/products/babyonline/lineup/detail.html?jancode=4904810935995" class="purchase-link" target="_blank" rel="noopener noreferrer">公式サイト</a>
+                    </div>
+                    <button class="cta-button" onclick="selectItem('プーメリー')" aria-label="プーメリーを選択する">
+                        これにする
+                    </button>
+                </div>
+
+                <!-- スリープミー -->
+                <div class="item-card">
+                    <div class="item-image-placeholder">
+                        YOGASLEEP<br>スリープミー<br>ホワイトノイズマシン
+                    </div>
+                    <h3 class="item-name">スリープミー</h3>
+                    <p class="item-oneliner">胎内に近い音で乳幼児＆大人の安眠をサポート。</p>
+                    <div class="owner-points">
+                        <h4>実際に使ってみた感想</h4>
+                        <ul>
+                            <li>子が音に強くよく寝ると実感</li>
+                            <li>大人の睡眠にも使える</li>
+                        </ul>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">寝かしつけ</span>
+                        <span class="tag">家族で使える</span>
+                    </div>
+                    <div class="recommended-age">
+                        <strong>対象年齢:</strong> 新生児〜大人
+                    </div>
+                    <div class="purchase-links">
+                        <a href="https://www.marpac.jp/" class="purchase-link" target="_blank" rel="noopener noreferrer">公式サイト</a>
+                    </div>
+                    <button class="cta-button" onclick="selectItem('スリープミー')" aria-label="スリープミーを選択する">
+                        これにする
+                    </button>
+                </div>
+
+                <!-- 見守りカメラ -->
+                <div class="item-card">
+                    <div class="item-image-placeholder">
+                        SwitchBot<br>見守りカメラ<br>ベビーモニター
+                    </div>
+                    <h3 class="item-name">見守りカメラ（SwitchBot等）</h3>
+                    <p class="item-oneliner">別室に行くなら必須。価格も機能も十分。</p>
+                    <div class="owner-points">
+                        <h4>実際に使ってみた感想</h4>
+                        <ul>
+                            <li>違う部屋に行く時の安心感</li>
+                            <li>同期の出産祝いにも実際に贈った</li>
+                        </ul>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">安心</span>
+                        <span class="tag">コスパ</span>
+                        <span class="tag">実用</span>
+                    </div>
+                    <div class="recommended-age">
+                        <strong>対象年齢:</strong> 新生児〜
+                    </div>
+                    <div class="purchase-links">
+                        <a href="https://www.switchbot.jp/products/switchbot-pan-tilt-cam" class="purchase-link" target="_blank" rel="noopener noreferrer">公式サイト</a>
+                    </div>
+                    <button class="cta-button" onclick="selectItem('見守りカメラ（SwitchBot等）')" aria-label="見守りカメラを選択する">
+                        これにする
+                    </button>
+                </div>
+
+                <!-- Sense-U -->
+                <div class="item-card">
+                    <div class="item-image-placeholder">
+                        Sense-U<br>一般医療機器<br>ベビーセンサー
+                    </div>
+                    <h3 class="item-name">Sense-U 一般医療機器 ベビーセンサー</h3>
+                    <p class="item-oneliner">利用期間は短めでも"離れる時の安心"が大きい。</p>
+                    <div class="owner-points">
+                        <h4>実際に使ってみた感想</h4>
+                        <ul>
+                            <li>就寝時や別室時の安心につながる</li>
+                            <li>高機能よりもコスパのバランスが良い</li>
+                        </ul>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">安心</span>
+                        <span class="tag">短期でも価値</span>
+                        <span class="tag">コスパ</span>
+                    </div>
+                    <div class="recommended-age">
+                        <strong>対象年齢:</strong> 新生児〜必要な期間
+                    </div>
+                    <div class="purchase-links">
+                        <a href="https://shop.sense-u.com/ja-jp" class="purchase-link" target="_blank" rel="noopener noreferrer">公式サイト</a>
+                    </div>
+                    <button class="cta-button" onclick="selectItem('Sense-U 一般医療機器 ベビーセンサー')" aria-label="Sense-Uベビーセンサーを選択する">
+                        これにする
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guide Section -->
+    <section class="guide-section">
+        <div class="container">
+            <div class="guide-content">
+                <h3>選び方のヒント</h3>
+                <p>寝かしつけ重視→スリーピングベスト/スリープミー。長く使える→スリーピングベスト/プーメリー。離れても安心→見守りカメラ/Sense‑U。大人も→スリープミー。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Form Section -->
+    <section class="form-section" id="form-section">
+        <div class="container">
+            <h2 class="section-title">ご希望をお聞かせください</h2>
+            
+            <div class="selected-item" id="selected-item">
+                <h3>選択されたアイテム</h3>
+                <p id="selected-item-name">まだ選択されていません</p>
+            </div>
+
+            <div class="form-placeholder">
+                フォームがここに埋め込まれます（form_urlが設定されていません）
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="faq-content">
+                <h3>重要なお知らせ</h3>
+                <p>在庫により同等品で代替の可能性あり／見守り機器は医療行為の代替ではありません。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 出産祝いの目録. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Function to select an item
+        function selectItem(itemName) {
+            const selectedItemDiv = document.getElementById('selected-item');
+            const selectedItemNameSpan = document.getElementById('selected-item-name');
+            
+            selectedItemNameSpan.textContent = itemName;
+            selectedItemDiv.classList.add('show');
+            
+            // Smooth scroll to form section
+            document.getElementById('form-section').scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+
+        // Add smooth scrolling for all anchor links
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Load images dynamically for better GitHub Pages compatibility
+            loadProductImages();
+        });
+
+        // Function to load product images
+        function loadProductImages() {
+            const imageData = {
+                'スリーピングベスト': 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&h=300&fit=crop&crop=center',
+                'プーメリー': 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop&crop=center',
+                'スリープミー': 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=300&fit=crop&crop=center',
+                '見守りカメラ（SwitchBot等）': 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400&h=300&fit=crop&crop=center',
+                'Sense-U 一般医療機器 ベビーセンサー': 'https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=400&h=300&fit=crop&crop=center'
+            };
+
+            const placeholders = document.querySelectorAll('.item-image-placeholder');
+            placeholders.forEach((placeholder, index) => {
+                const itemName = Object.keys(imageData)[index];
+                if (itemName && imageData[itemName]) {
+                    const img = document.createElement('img');
+                    img.src = imageData[itemName];
+                    img.alt = itemName + 'の画像';
+                    img.className = 'item-image';
+                    img.loading = 'lazy';
+                    
+                    img.onload = function() {
+                        placeholder.parentNode.replaceChild(img, placeholder);
+                    };
+                    
+                    img.onerror = function() {
+                        // Keep placeholder if image fails to load
+                        console.log('Failed to load image for:', itemName);
+                    };
+                }
+            });
+        }
+    </script>
+</body>
+</html>
+
