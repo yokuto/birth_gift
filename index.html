@@ -662,11 +662,12 @@
             // Prefer official-site images (Open Graph or product hero) when available.
             // Fallbacks use Unsplash only if a mapping is missing.
             const officialImageMap = {
+                // Prefer local assets for GitHub Pages reliability
                 'スリーピングベスト': 'https://familiar.co.jp/cdn/shop/products/07091617_5b430c133fd0b.jpg?v=1667021861&width=1200',
-                'プーメリー': 'https://www.takaratomy.co.jp/products/upfiles/products/4904810935995_b.jpg',
+                'プーメリー': 'assets/images/pooh-6way-gym.jpg',
                 'スリープミー': 'https://marpac.jp/sleepme/mod/share.jpg',
                 '見守りカメラ（SwitchBot等）': 'https://www.switchbot.jp/cdn/shop/products/switchbotjian-shou-rikamera-switchbotzhu-shi-hui-she-670147_1200x1200.jpg?v=1698820985',
-                'Sense-U 一般医療機器 ベビーセンサー': 'https://shop.sense-u.com/cdn/shop/files/Sense-U_ProBB-1-Main-Dark_0498ca63-1af4-42a5-93db-a74b8b637100.jpg?v=1755141011&width=1200'
+                'Sense-U 一般医療機器 ベビーセンサー': 'assets/images/senseu-pro-main.jpg'
             };
 
             const fallbackImageMap = {
@@ -690,12 +691,13 @@
                 if (!preferredSrc) return;
 
                 const img = document.createElement('img');
-                img.src = preferredSrc;
                 img.alt = itemName + 'の画像';
                 img.className = 'item-image';
                 img.loading = 'lazy';
                 img.decoding = 'async';
-                img.referrerPolicy = 'no-referrer';
+                if (/^https?:\/\//.test(preferredSrc)) {
+                    img.referrerPolicy = 'no-referrer';
+                }
 
                 // Wrap image with link to official site, if present
                 if (linkEl && linkEl.href) {
@@ -704,23 +706,26 @@
                     anchor.target = '_blank';
                     anchor.rel = 'noopener noreferrer';
                     anchor.appendChild(img);
-                    img.onload = function() {
+                    img.addEventListener('load', function() {
                         placeholder.parentNode.replaceChild(anchor, placeholder);
-                    };
+                    }, { once: true });
                 } else {
-                    img.onload = function() {
+                    img.addEventListener('load', function() {
                         placeholder.parentNode.replaceChild(img, placeholder);
-                    };
+                    }, { once: true });
                 }
 
-                img.onerror = function() {
+                img.addEventListener('error', function() {
                     // Try fallback once if official image fails
                     if (fallbackSrc && img.src !== fallbackSrc) {
                         img.src = fallbackSrc;
                         return;
                     }
                     console.log('Failed to load image for:', itemName);
-                };
+                }, { once: true });
+
+                // Start loading last to ensure handlers are set
+                img.src = preferredSrc;
             });
         }
     </script>
