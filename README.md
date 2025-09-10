@@ -50,4 +50,4 @@ Sense‑Uの注記について
 
 ## ライセンス
 
-© 2025 出産祝いの目録. All rights reserved.
+© 2025 出産祝いの目録x. All rights reserved.
